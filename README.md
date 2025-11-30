@@ -23,42 +23,39 @@ This project is an AI-powered **Multi-Agent System** that provides comprehensive
 
 ## 🏗️ Architecture
 
+### System Overview
+
 ```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    LOGISTICS COORDINATOR AGENT                          │
-│                         (Orchestrator)                                  │
-│                      Gemini 2.0 Flash                                   │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│                      4 SPECIALIST SUB-AGENTS                            │
-│                                                                         │
-│  ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐     │
-│  │  🗺️ ROUTE PLANNER │ │  💰 COST ANALYST  │ │  📄 DOC SPECIALIST│     │
-│  │      AGENT        │ │      AGENT        │ │      AGENT        │     │
-│  │                   │ │                   │ │                   │     │
-│  │ • search_sea      │ │ • calc_sea_cost   │ │ • get_documents   │     │
-│  │ • search_air      │ │ • calc_air_cost   │ │ • check_customs   │     │
-│  │ • recommend_mode  │ │ • calc_landed     │ │ • get_hs_code     │     │
-│  │                   │ │ • compare_options │ │ • gen_checklist   │     │
-│  │   (3 tools)       │ │   (4 tools)       │ │   (4 tools)       │     │
-│  └───────────────────┘ └───────────────────┘ └───────────────────┘     │
-│                                                                         │
-│  ┌─────────────────────────────────────────────────────────────────┐   │
-│  │  💾 QUOTE MANAGER AGENT                                          │   │
-│  │                                                                   │   │
-│  │  • save_quote          • get_quote_history                       │   │
-│  │  • save_customer_info  • get_customer_info                       │   │
-│  │                                                                   │   │
-│  │  (4 tools)                                                        │   │
-│  └─────────────────────────────────────────────────────────────────┘   │
-│                                                                         │
-│  ┌─────────────────────────────────────────────────────────────────┐   │
-│  │                      DUMMY DATA LAYER                            │   │
-│  │          routes_data | rates_data | regulations_data             │   │
-│  └─────────────────────────────────────────────────────────────────┘   │
-│                                                                         │
-└─────────────────────────────────────────────────────────────────────────┘
++------------------------------------------+
+|      LOGISTICS COORDINATOR AGENT         |
+|            (Orchestrator)                |
+|          Gemini 2.0 Flash                |
++--------------------+---------------------+
+                     |
+     +---------------+---------------+---------------+
+     |               |               |               |
+     v               v               v               v
++-----------+  +-----------+  +-----------+  +-----------+
+|   ROUTE   |  |   COST    |  |    DOC    |  |   QUOTE   |
+|  PLANNER  |  |  ANALYST  |  | SPECIALIST|  |  MANAGER  |
+| (3 tools) |  | (4 tools) |  | (4 tools) |  | (4 tools) |
++-----------+  +-----------+  +-----------+  +-----------+
+                     |
+                     v
+          +-------------------+
+          |    DUMMY DATA     |
+          |      LAYER        |
+          +-------------------+
 ```
+
+### Sub-Agents Detail
+
+| Agent | Role | Tools |
+|-------|------|-------|
+| 🗺️ **Route Planner** | Find shipping routes | `search_sea_routes`, `search_air_routes`, `recommend_transport_mode` |
+| 💰 **Cost Analyst** | Calculate costs | `calculate_sea_freight_cost`, `calculate_air_freight_cost`, `calculate_total_landed_cost`, `compare_shipping_options` |
+| 📄 **Doc Specialist** | Document guidance | `get_required_documents`, `check_customs_regulations`, `get_hs_code_info`, `generate_shipping_checklist` |
+| 💾 **Quote Manager** | Save/retrieve quotes | `save_quote`, `get_quote_history`, `save_customer_info`, `get_customer_info` |
 
 ### Agent Delegation
 
@@ -174,13 +171,13 @@ python logistics_agent_multiagent.py --interactive
 
 ✅ Session started for: 001
 
-👤 You: 東京から上海まで、500kg 2CBMの海上運賃を教えて
+👤 You: What is the sea freight cost from Tokyo to Shanghai for 500kg, 2CBM?
 
-🤖 Agent: 東京から上海までの500kg、2CBMの海上運賃は488ドルです。
-          料金内訳：BAF $13.50, CAF $4.50, THC $330, 基本運賃 $90...
-          この見積もりは30日間有効です。
+🤖 Agent: The sea freight cost from Tokyo to Shanghai for 500kg, 2CBM is $488.
+          Breakdown: BAF $13.50, CAF $4.50, THC $330, Base freight $90...
+          This quote is valid for 30 days.
 
-👤 You: この見積もりを保存して
+👤 You: Please save this quote.
 
 🤖 Agent: OK. I have saved the quote with quote ID Q20251130143148,
           which is valid until 2025-12-30.
@@ -238,6 +235,37 @@ logistics_agent/
 | Agents | 5 (1 Orchestrator + 4 Specialists) |
 | Tools | 15 custom functions |
 | Memory | In-memory (customer_memory dict, quote_history list) |
+
+---
+
+## 📊 Data Layer
+
+### Current Implementation (Demo)
+
+This project uses **embedded dummy data** for demonstration purposes. The data is defined directly in the Python code for simplicity and portability.
+
+| Data Type | Contents |
+|-----------|----------|
+| **Routes** | 5 sea routes, 3 air routes (Japan ↔ China/Thailand/USA/Europe) |
+| **Rates** | FCL, LCL, Air freight pricing with surcharges |
+| **Regulations** | Import rules, HS codes, trade agreements |
+
+### Production Enhancement
+
+In a production environment, the dummy data layer would be replaced with:
+
+| Component | Technology | Purpose |
+|-----------|------------|---------|
+| **Database** | PostgreSQL / MongoDB | Store routes, rates, customer data |
+| **Carrier APIs** | Maersk, COSCO, ONE, FedEx | Real-time rates and tracking |
+| **Customs APIs** | Government databases | Live regulations and HS codes |
+| **Exchange Rates** | Forex API | Currency conversion |
+| **Caching** | Redis | Performance optimization |
+
+```
+Current:  Agent → Dummy Data (in-memory dict)
+Future:   Agent → API Gateway → Database / External APIs
+```
 
 ---
 
