@@ -1,0 +1,99 @@
+{
+  "sea_routes": [
+    {
+      "id": "SEA001",
+      "origin": {"port": "Tokyo", "port_code": "JPTYO", "country": "Japan"},
+      "destination": {"port": "Shanghai", "port_code": "CNSHA", "country": "China"},
+      "transit_time_days": 3,
+      "frequency": "Daily",
+      "carriers": ["COSCO", "ONE", "Evergreen"],
+      "route_type": "Direct"
+    },
+    {
+      "id": "SEA002",
+      "origin": {"port": "Tokyo", "port_code": "JPTYO", "country": "Japan"},
+      "destination": {"port": "Suzhou", "port_code": "CNSZH", "country": "China"},
+      "transit_time_days": 5,
+      "frequency": "3 times/week",
+      "carriers": ["COSCO", "Yang Ming"],
+      "via": "Shanghai",
+      "route_type": "Transshipment"
+    },
+    {
+      "id": "SEA003",
+      "origin": {"port": "Yokohama", "port_code": "JPYOK", "country": "Japan"},
+      "destination": {"port": "Bangkok", "port_code": "THBKK", "country": "Thailand"},
+      "transit_time_days": 12,
+      "frequency": "Weekly",
+      "carriers": ["ONE", "Hapag-Lloyd", "MSC"],
+      "via": "Singapore",
+      "route_type": "Transshipment"
+    },
+    {
+      "id": "SEA004",
+      "origin": {"port": "Osaka", "port_code": "JPOSA", "country": "Japan"},
+      "destination": {"port": "Los Angeles", "port_code": "USLAX", "country": "USA"},
+      "transit_time_days": 14,
+      "frequency": "Weekly",
+      "carriers": ["ONE", "Matson", "Evergreen"],
+      "route_type": "Direct"
+    },
+    {
+      "id": "SEA005",
+      "origin": {"port": "Tokyo", "port_code": "JPTYO", "country": "Japan"},
+      "destination": {"port": "Rotterdam", "port_code": "NLRTM", "country": "Netherlands"},
+      "transit_time_days": 35,
+      "frequency": "Weekly",
+      "carriers": ["Maersk", "MSC", "Hapag-Lloyd"],
+      "via": "Singapore, Suez Canal",
+      "route_type": "Transshipment"
+    }
+  ],
+  "air_routes": [
+    {
+      "id": "AIR001",
+      "origin": {"airport": "Narita", "airport_code": "NRT", "country": "Japan"},
+      "destination": {"airport": "Shanghai Pudong", "airport_code": "PVG", "country": "China"},
+      "transit_time_days": 1,
+      "frequency": "Daily",
+      "carriers": ["ANA Cargo", "JAL Cargo", "China Eastern"],
+      "route_type": "Direct"
+    },
+    {
+      "id": "AIR002",
+      "origin": {"airport": "Narita", "airport_code": "NRT", "country": "Japan"},
+      "destination": {"airport": "Bangkok Suvarnabhumi", "airport_code": "BKK", "country": "Thailand"},
+      "transit_time_days": 1,
+      "frequency": "Daily",
+      "carriers": ["Thai Airways", "ANA Cargo", "JAL Cargo"],
+      "route_type": "Direct"
+    },
+    {
+      "id": "AIR003",
+      "origin": {"airport": "Kansai", "airport_code": "KIX", "country": "Japan"},
+      "destination": {"airport": "Los Angeles", "airport_code": "LAX", "country": "USA"},
+      "transit_time_days": 2,
+      "frequency": "Daily",
+      "carriers": ["ANA Cargo", "United Cargo", "FedEx"],
+      "route_type": "Direct"
+    }
+  ],
+  "truck_routes": [
+    {
+      "id": "TRK001",
+      "origin": {"city": "Tokyo", "country": "Japan"},
+      "destination": {"city": "Osaka", "country": "Japan"},
+      "transit_time_days": 1,
+      "distance_km": 500,
+      "carriers": ["Yamato", "Sagawa", "Nippon Express"]
+    },
+    {
+      "id": "TRK002",
+      "origin": {"city": "Shanghai", "country": "China"},
+      "destination": {"city": "Suzhou", "country": "China"},
+      "transit_time_days": 0.5,
+      "distance_km": 100,
+      "carriers": ["SF Express", "ZTO Express"]
+    }
+  ]
+}

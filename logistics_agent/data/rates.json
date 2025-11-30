@@ -1,0 +1,62 @@
+{
+  "sea_freight_rates": {
+    "base_rates_per_cbm": {
+      "Japan-China": {"20ft": 150, "40ft": 280, "LCL": 45},
+      "Japan-Thailand": {"20ft": 350, "40ft": 650, "LCL": 85},
+      "Japan-USA": {"20ft": 2500, "40ft": 4500, "LCL": 120},
+      "Japan-Europe": {"20ft": 1800, "40ft": 3200, "LCL": 95}
+    },
+    "surcharges": {
+      "BAF": {"description": "Bunker Adjustment Factor", "rate_percent": 15},
+      "CAF": {"description": "Currency Adjustment Factor", "rate_percent": 5},
+      "THC_origin": {"description": "Terminal Handling Charge (Origin)", "rate_usd": 150},
+      "THC_destination": {"description": "Terminal Handling Charge (Destination)", "rate_usd": 180},
+      "documentation_fee": {"description": "B/L Fee", "rate_usd": 50},
+      "seal_fee": {"description": "Container Seal", "rate_usd": 15}
+    },
+    "container_specs": {
+      "20ft": {"max_weight_kg": 21770, "max_cbm": 33, "tare_weight_kg": 2230},
+      "40ft": {"max_weight_kg": 26480, "max_cbm": 67, "tare_weight_kg": 3720},
+      "40ft_HC": {"max_weight_kg": 26280, "max_cbm": 76, "tare_weight_kg": 3920}
+    }
+  },
+  "air_freight_rates": {
+    "base_rates_per_kg": {
+      "Japan-China": {"min_charge": 80, "under_45kg": 8.5, "45_100kg": 6.5, "100_300kg": 5.0, "300_500kg": 4.2, "over_500kg": 3.5},
+      "Japan-Thailand": {"min_charge": 100, "under_45kg": 12.0, "45_100kg": 9.0, "100_300kg": 7.5, "300_500kg": 6.0, "over_500kg": 5.0},
+      "Japan-USA": {"min_charge": 150, "under_45kg": 15.0, "45_100kg": 12.0, "100_300kg": 9.5, "300_500kg": 8.0, "over_500kg": 6.5},
+      "Japan-Europe": {"min_charge": 120, "under_45kg": 14.0, "45_100kg": 11.0, "100_300kg": 8.5, "300_500kg": 7.0, "over_500kg": 5.5}
+    },
+    "surcharges": {
+      "fuel_surcharge_percent": 25,
+      "security_surcharge_per_kg": 0.15,
+      "AWB_fee": 30,
+      "handling_fee_per_kg": 0.25
+    },
+    "dimensional_factor": 6000
+  },
+  "trucking_rates": {
+    "Japan_domestic": {
+      "base_rate_per_km": 1.2,
+      "min_charge": 15000,
+      "weight_surcharge_per_kg": 0.05
+    },
+    "China_domestic": {
+      "base_rate_per_km": 0.4,
+      "min_charge": 500,
+      "weight_surcharge_per_kg": 0.02
+    }
+  },
+  "insurance_rates": {
+    "standard_percent": 0.35,
+    "high_value_percent": 0.55,
+    "fragile_percent": 0.75,
+    "minimum_premium_usd": 25
+  },
+  "customs_clearance": {
+    "Japan_export": {"documentation": 50, "inspection": 80, "handling": 45},
+    "China_import": {"documentation": 65, "inspection": 100, "handling": 55},
+    "Thailand_import": {"documentation": 55, "inspection": 90, "handling": 50},
+    "USA_import": {"documentation": 100, "inspection": 150, "handling": 75}
+  }
+}
